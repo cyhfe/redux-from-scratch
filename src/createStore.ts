@@ -10,6 +10,9 @@ export default function createStore(reducer, preloadedState) {
   }
   function subscribe(listener) {
     listeners.push(listener);
+    return () => {
+      listener.filter(l => l !== listener)
+    }
   }
   const store = {
     getState,
